@@ -47,7 +47,7 @@ Vagrant.configure(2) do |config|
   config.vm.provider "virtualbox" do |vb|
     # Display the VirtualBox GUI when booting the machine
     # vb.gui = true
-  
+
     # Customize the amount of memory on the VM:
     vb.memory = "2024"
   end
@@ -68,4 +68,14 @@ Vagrant.configure(2) do |config|
   # config.vm.provision "shell", inline <<-SHELL
   #   sudo apt-get install apache2
   # SHELL
+
+  #user Berkshelf to manage cookbook dependencies
+  config.berkshelf.enabled = true
+
+  #provision machine using chef-solo
+  config.vm.provision :chef_solo do |chef|
+    chef.roles_path = "chef/roles"
+    chef.cookbooks_path = ["chef/site-cookbooks", "chef/cookbooks"]
+    chef.add_role "rstudio-server"
+  end
 end
