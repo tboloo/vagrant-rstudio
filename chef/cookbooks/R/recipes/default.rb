@@ -11,6 +11,9 @@ case node["platform"]
 when "debian"
   include_recipe "R::debian"
 else 
+when "ubuntu"
+  include_recipe "R::ubuntu"
+else 
   raise Chef::Exceptions::RecipeNotFound, "Could not find recipe for platform #{node["platform"]}"
 end
 
