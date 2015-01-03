@@ -37,15 +37,33 @@ end
 
 #RStudio has hard coded dependency on buggy 0.9.8 version
 execute 'download libssl-0.9.8' do
-	command 'wget -nc http://ftp.us.debian.org/debian/pool/main/o/openssl/libssl0.9.8_0.9.8o-4squeeze14_amd64.deb'
+	command 'wget http://ftp.us.debian.org/debian/pool/main/o/openssl/libssl0.9.8_0.9.8o-4squeeze14_amd64.deb'
 end
 
 execute 'install libssl-0.9.8' do
 	command 'sudo dpkg -i libssl0.9.8_0.9.8o-4squeeze14_amd64.deb'
 end
 
+line = 'export LC_ALL=en_US.UTF-8'
+
+file = Chef::Util::FileEdit.new('/etc/profile')
+file.insert_line_if_no_match(/#{line}/, line)
+file.write_file
+
+template "/etc/environment" do
+	source 'environment.erb'
+	owner 'root'
+	group 'root'
+	mode '0644'
+end
+
+bash 'source /etc/profile' do
+	command 'source /etc/profile'
+	action :run
+end
+
 execute 'download RStudio' do
-	command 'wget -nc http://download2.rstudio.org/rstudio-server-0.98.1091-amd64.deb'
+	command 'wget http://download2.rstudio.org/rstudio-server-0.98.1091-amd64.deb'
 end
 
 execute 'install RStudio' do

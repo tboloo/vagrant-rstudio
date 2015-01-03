@@ -14,13 +14,6 @@ else
   raise Chef::Exceptions::RecipeNotFound, "Could not find recipe for platform #{node["platform"]}"
 end
 
-template "/etc/environment" do
-	source 'environment.erb'
-	owner 'root'
-	group 'root'
-	mode '0644'
-end
-
 template "/etc/rstudio/rserver.conf" do
 	source 'rserver.conf.erb'
 	owner 'root'
