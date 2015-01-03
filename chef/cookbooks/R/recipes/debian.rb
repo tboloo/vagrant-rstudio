@@ -1,9 +1,9 @@
 include_recipe 'apt'
 
 apt_repository "r-base" do
-	uri "http://r.meteo.uni.wroc.pl/bin/linux/debian"
+	uri "http://cran.rstudio.com/bin/linux/debian/"
 	components ["wheezy-cran3/"]
-	keyserver "keys.gnupg.net"
+	keyserver "pgp.mit.edu"
 	key "381BA480"
 end
 
