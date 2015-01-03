@@ -3,6 +3,10 @@ chef/cookbooks/R CHANGELOG
 
 This file is used to list changes made in each version of the chef/cookbooks/R cookbook.
 
+0.3.1
+-----
+- tboloo - Fixed minor issues (mostly with LC_ALL not being populated)
+
 0.2.0
 -----
 - tboloo - functional installation of RStudio server with custom configuration
