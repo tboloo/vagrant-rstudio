@@ -57,11 +57,11 @@ execute 'git config email' do
 	action :run
 end
 
-file "/home/#{node[:rserver][:username]}/.ssh/github.rsa" do
+file "/home/#{node[:rserver][:username]}/.ssh/id_rsa" do
 	action :delete
 end
 
-file "/home/#{node[:rserver][:username]}/.ssh/github.rsa.pub" do
+file "/home/#{node[:rserver][:username]}/.ssh/id_rsa.pub" do
 	action :delete
 end
 
@@ -72,14 +72,5 @@ execute 'generate ssh keys for github' do
 		'HOME' => "/home/ruser"
 		})
 	command "ssh-keygen -f $HOME/.ssh/id_rsa -t rsa -N ''"
-	action :run
-end
-
-file "/vagrant/github.rsa.pub" do
-	action :delete
-end
-
-execute 'copy public key to shared folder' do
-	command "cp /home/#{node[:rserver][:username]}/.ssh/id_rsa.pub /vagrant/github.rsa.pub"
 	action :run
 end
