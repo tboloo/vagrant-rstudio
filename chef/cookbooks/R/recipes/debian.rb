@@ -57,7 +57,7 @@ bash 'source /etc/profile' do
 end
 
 execute 'download RStudio' do
-	command 'wget http://download2.rstudio.org/rstudio-server-0.98.1091-amd64.deb'
+	command 'wget -nc http://download2.rstudio.org/rstudio-server-0.98.1091-amd64.deb'
 end
 
 execute 'install RStudio' do

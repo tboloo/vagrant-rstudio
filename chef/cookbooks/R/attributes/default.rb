@@ -9,3 +9,6 @@ default['rserver']['password'] = '$1$ZnGaA5f3$qcM2y5elSNSFomvXziI8/1'
 default['LC_ALL'] = 'en_US.UTF-8'
 default['LANG'] = 'en_US.UTF-8'
 default['LANGUAGE'] = 'C'
+
+default['git']['username'] = 'tboloo'
+default['git']['email'] = 'bolek@vault13.pl'
