@@ -61,5 +61,5 @@ end
 
 execute 'install RStudio' do
 	environment "LC_ALL" => "en_US.UTF-8"
-	command 'gdebi rstudio-server-0.98.1091-amd64.deb'
+	command 'gdebi -n rstudio-server-0.98.1091-amd64.deb'
 end
