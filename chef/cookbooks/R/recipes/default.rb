@@ -38,41 +38,48 @@ group node['rserver']['group'] do
 end
 
 execute 'git config user' do
-	cwd "/home/vagrant"                                                           
-	user "vagrant"
+	cwd "/home/ruser"                                                           
+	user "ruser"
 	environment ({
-		'HOME' => "/home/vagrant"
+		'HOME' => "/home/ruser"
 		})
 	command "git config --global user.name #{node[:git][:username]}"
 	action :run
 end
 
 execute 'git config email' do
-	cwd "/home/vagrant"                                                           
-	user "vagrant"
+	cwd "/home/ruser"                                                           
+	user "ruser"
 	environment ({
-		'HOME' => "/home/vagrant"
+		'HOME' => "/home/ruser"
 		})
 	command "git config --global user.email #{node[:git][:email]}"
 	action :run
 end
 
+file "/home/#{node[:rserver][:username]}/.ssh/github.rsa" do
+	action :delete
+end
+
+file "/home/#{node[:rserver][:username]}/.ssh/github.rsa.pub" do
+	action :delete
+end
+
 execute 'generate ssh keys for github' do
-	cwd "/home/vagrant"                                                           
-	user "vagrant"
+	cwd "/home/ruser"                                                           
+	user "ruser"
 	environment ({
-		'HOME' => "/home/vagrant"
+		'HOME' => "/home/ruser"
 		})
-	command "ssh-keygen -f $HOME/.ssh/github.rsa -t rsa -N ''"
+	command "ssh-keygen -f $HOME/.ssh/id_rsa -t rsa -N ''"
 	action :run
 end
 
+file "/vagrant/github.rsa.pub" do
+	action :delete
+end
+
 execute 'copy public key to shared folder' do
-	cwd "/home/vagrant"                                                           
-	user "vagrant"
-	environment ({
-		'HOME' => "/home/vagrant"
-		})
-	command "cp -n $HOME/.ssh/github.rsa.pub /vagrant"
+	command "cp /home/#{node[:rserver][:username]}/.ssh/id_rsa.pub /vagrant/github.rsa.pub"
 	action :run
 end

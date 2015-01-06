@@ -10,5 +10,5 @@ default['LC_ALL'] = 'en_US.UTF-8'
 default['LANG'] = 'en_US.UTF-8'
 default['LANGUAGE'] = 'C'
 
-default['git']['username'] = 'tboloo'
-default['git']['email'] = 'bolek@vault13.pl'
+default['git']['username'] = 'ruser'
+default['git']['email'] = 'ruser@email.com'
