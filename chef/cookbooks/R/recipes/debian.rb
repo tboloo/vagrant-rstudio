@@ -3,8 +3,7 @@ include_recipe 'apt'
 apt_repository "r-base" do
 	uri "http://cran.rstudio.com/bin/linux/debian/"
 	components ["wheezy-cran3/"]
-	keyserver "pgp.mit.edu"
-	key "381BA480"
+	key "jranke.asc"
 end
 
 package 'r-base' do
@@ -35,7 +34,7 @@ execute 'download libssl-0.9.8' do
 end
 
 execute 'install libssl-0.9.8' do
-	command 'sudo dpkg -i libssl0.9.8_0.9.8o-4squeeze14_amd64.deb'
+	command 'dpkg -i libssl0.9.8_0.9.8o-4squeeze14_amd64.deb'
 end
 
 line = 'export LC_ALL=en_US.UTF-8'
@@ -61,5 +60,6 @@ execute 'download RStudio' do
 end
 
 execute 'install RStudio' do
-	command 'sudo gdebi rstudio-server-0.98.1091-amd64.deb'
+	environment "LC_ALL" => "en_US.UTF-8"
+	command 'gdebi rstudio-server-0.98.1091-amd64.deb'
 end
